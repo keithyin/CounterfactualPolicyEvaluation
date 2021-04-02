@@ -1,4 +1,3 @@
-
 def doubly_robust(dataset):
     assert isinstance(dataset, list)
     assert len(dataset) > 0, ""
@@ -19,5 +18,7 @@ def doubly_robust_core(true_action_reward,
                        new_policy_choose_action_prob,
                        old_policy_choose_action_prob,
                        dm_new_action_reward):
+
+    old_policy_choose_action_prob = 1e-5 if old_policy_choose_action_prob < 1e-5 else old_policy_choose_action_prob
     return (true_action_reward - dm_action_reward) * new_policy_choose_action_prob / old_policy_choose_action_prob \
            + dm_new_action_reward
